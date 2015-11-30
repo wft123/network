@@ -9,12 +9,15 @@ public class NSLookup {
 		Scanner scanner = new Scanner(System.in);
 		
 		while(true){
+			System.out.print("> ");
 			String hostName = scanner.nextLine();
 			if(hostName.trim().equals("exit")) return;
 			try {
-				InetAddress[] allHostName = InetAddress.getAllByName(hostName);
+				InetAddress[] allHost = InetAddress.getAllByName(hostName);
+				for(InetAddress host : allHost){
+					System.out.println(host.getHostName()+" : " + host.getHostAddress());
+				}
 			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
