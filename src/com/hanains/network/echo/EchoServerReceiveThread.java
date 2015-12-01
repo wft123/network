@@ -26,15 +26,15 @@ public class EchoServerReceiveThread extends Thread {
 			//6. 데이터 받기
 			try{
 				byte[] buffer = new byte[256];
+				String clientInfo = socket.getInetAddress().getHostAddress()+":"+socket.getPort();
 				while(true){
 					int readByte = inputStream.read(buffer);
 					if(readByte<0){
-						System.out.println("종료되었습니다.");
+						System.out.println("["+clientInfo+"]가 종료되었습니다.");
 						break;
 					}
 					String data = new String(buffer,0,readByte);
-					String clientInfo = socket.getInetAddress().getHostAddress()+":"+socket.getPort();
-					System.out.println("["+clientInfo+"]:"+data);
+					System.out.println("["+clientInfo+"]: "+data);
 					
 					//7. 데이터 보내기
 					outputStream.write(data.getBytes("UTF-8"));
