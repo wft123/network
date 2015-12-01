@@ -11,7 +11,7 @@ public class NSLookup {
 		while(true){
 			System.out.print("> ");
 			String hostName = scanner.nextLine();
-			if(hostName.trim().equals("exit")) return;
+			if("exit".trim().equals(hostName)) return;
 			try {
 				InetAddress[] allHost = InetAddress.getAllByName(hostName);
 				for(InetAddress host : allHost){
