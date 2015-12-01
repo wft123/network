@@ -10,9 +10,9 @@ import java.util.Vector;
 
 public class EchoServer {
 	private static final int PORT = 5050;
-	private static List<Socket> socketList = new Vector<Socket>();
 	
 	public static void main(String[] args) {
+		BroadCast bc = BroadCast.getInstance();
 		ServerSocket serverSocket = null;
 		try {
 			//1.서버 소켓 생성
@@ -32,7 +32,7 @@ public class EchoServer {
 				String remoteHostAddress = inetSocketAddress.getAddress().getHostAddress();
 				int remoteHostPort = inetSocketAddress.getPort();
 				System.out.println("[서버] connected from_"+remoteHostAddress+":"+remoteHostPort);
-				socketList.add(socket);
+				bc.add(socket);
 				new EchoServerReceiveThread(socket).start();
 			}
 		} catch (IOException e) {

@@ -8,6 +8,7 @@ import java.net.Socket;
 public class EchoServerReceiveThread extends Thread {
 	
 	Socket socket = null;
+	BroadCast bc = BroadCast.getInstance();
 	
 	public EchoServerReceiveThread (Socket socket){
 		this.socket = socket;
@@ -32,7 +33,8 @@ public class EchoServerReceiveThread extends Thread {
 						break;
 					}
 					String data = new String(buffer,0,readByte);
-					System.out.println("[서버]수신 데이터:"+data);
+					String clientInfo = socket.getInetAddress().getHostAddress()+":"+socket.getPort();
+					System.out.println("["+clientInfo+"]:"+data);
 					
 					//7. 데이터 보내기
 					outputStream.write(data.getBytes("UTF-8"));
