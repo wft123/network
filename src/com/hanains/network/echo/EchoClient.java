@@ -8,11 +8,15 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class EchoClient {
-	private static final String SERVER_IP="192.168.1.14";
-	private static final int PORT = 5050;
+	private static String SERVER_IP="192.168.1.14";
+	private static int PORT = 5050;
 	private static Socket socket = null;
 	
 	public static void main(String[] args) {
+		if(args.length>0){
+			SERVER_IP = args[0];
+			PORT = Integer.parseInt(args[1]);
+		}
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 		

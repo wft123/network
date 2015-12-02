@@ -27,11 +27,6 @@ public class EchoServer {
 				//3. 연결요청대기(accept)
 				Socket socket = serverSocket.accept();
 				
-				//4. 연결 성공
-				InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-				String remoteHostAddress = inetSocketAddress.getAddress().getHostAddress();
-				int remoteHostPort = inetSocketAddress.getPort();
-				System.out.println("[서버] connected from_"+remoteHostAddress+":"+remoteHostPort);
 				bc.add(socket);
 				new EchoServerReceiveThread(socket).start();
 			}
