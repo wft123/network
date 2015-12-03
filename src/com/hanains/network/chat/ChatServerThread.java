@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Hashtable;
@@ -44,7 +43,9 @@ public class ChatServerThread extends Thread {
 				
 				if( "join".equalsIgnoreCase( tokens[0] ) ) {
 					doJoin( tokens[1], printWriter );
-				} else if( "message".equalsIgnoreCase( tokens[0] ) ) {
+				}else if("talk".equalsIgnoreCase(tokens[1])){
+					doTalk(tokens[2],tokens[3]);
+				}else if( "message".equalsIgnoreCase( tokens[0] ) ) {
 					doMessage(tokens[1]);
 				} else if( "quit".equalsIgnoreCase( tokens[0] ) ) {
 					doQuit(printWriter);
@@ -83,6 +84,16 @@ public class ChatServerThread extends Thread {
 		}
 		printWriter.println(ack);
 		printWriter.flush();
+	}
+	
+	private void doTalk(String name, String msg){
+		if(clientTable.containsKey(name)){
+			PrintWriter pw = clientTable.get(name).getPrintWriter();
+			pw.println("message:("+client.getName()+")>>"+msg);
+			pw.flush();
+		}else{
+			client.getPrintWriter().println("접속하지 않은 ID입니다");
+		}
 	}
 	
 	private void doMessage(String message){
