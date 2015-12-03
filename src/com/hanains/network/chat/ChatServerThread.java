@@ -92,7 +92,8 @@ public class ChatServerThread extends Thread {
 			pw.println("message:("+client.getName()+")>>"+msg);
 			pw.flush();
 		}else{
-			client.getPrintWriter().println("접속하지 않은 ID입니다");
+			client.getPrintWriter().println("message:접속하지 않은 ID입니다");
+			client.getPrintWriter().flush();
 		}
 	}
 	
